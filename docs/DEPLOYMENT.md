@@ -13,3 +13,7 @@ A local branch is suitable for review before pushing. Confirm the destination re
 The application's financial and learning data is stored in the visitor's browser. Private site hosting, if selected, may require the host's access gate; it does not add an account to the calculator itself. Service workers require HTTPS or localhost. Offline capability is available only after the first complete load and cache installation. Browser storage clearing removes offline caches independently of app progress.
 
 All static files are public to whoever can access the host. Only application code and original course content belong in dist. Never include local user financial exports, browser storage, credentials, research downloads or test artifacts in a deployment.
+
+## GitHub Pages
+
+The `Deploy GitHub Pages` workflow publishes pushes to `main` at https://phyoethantnaing.github.io/fincalc-academy/. In repository Settings → Pages, select GitHub Actions as the source. The workflow runs financial tests, builds with `--base=/fincalc-academy/`, and deploys the static artifact. The base setting keeps scripts, styles, charts, fonts, the manifest, and the service worker under the repository path. Other static hosts continue to use the normal root-path build.

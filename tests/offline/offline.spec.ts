@@ -3,7 +3,7 @@ test("production PWA precaches lessons, fonts and charts then computes offline a
   page,
   context,
 }) => {
-  await page.goto("/");
+  await page.goto(process.env.PLAYWRIGHT_BASE_PATH || "/");
   await page.evaluate(async () => {
     await navigator.serviceWorker.ready;
   });
