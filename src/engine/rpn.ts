@@ -391,6 +391,7 @@ export class Calculator {
         this.entering = true;
       }
       if (!this.entry.includes("e")) this.entry += "e";
+      this.x = D(this.entry.endsWith("e") ? this.entry + "0" : this.entry);
       return;
     }
     if (k === "ENTER") {

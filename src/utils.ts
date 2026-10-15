@@ -1,11 +1,14 @@
 import { Calculator } from "./engine/rpn";
 import { D, type Variable } from "./engine/finance";
-export const money = (v: number | string, decimals = 2, separator = true) =>
-  new Intl.NumberFormat("en-US", {
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-    useGrouping: separator,
-  }).format(Number(v));
+export const money = (v: number | string, decimals = 2, separator = true) => {
+  const value = D(v);
+  if (!value.isFinite()) return "—";
+  const [integer, fraction] = value.toFixed(decimals).split(".");
+  const grouped = separator
+    ? integer.replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+    : integer;
+  return fraction === undefined ? grouped : grouped + "." + fraction;
+};
 export function readStore<T>(key: string, fallback: T): T {
   try {
     return (

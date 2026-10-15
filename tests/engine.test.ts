@@ -1,3 +1,4 @@
+import { money } from "../src/utils";
 import { describe, it, expect } from "vitest";
 import { Calculator } from "../src/engine/rpn";
 import {
@@ -251,4 +252,13 @@ describe("every practice answer is reproduced by its displayed steps", () => {
         expect(c.error).toBe("");
         expect(c.x.toNumber()).toBeCloseTo(expectedPractice(lesson, level), 6);
       });
+});
+
+it("display formatting retains decimal strings beyond binary-safe integer precision", () => {
+  expect(money("12345678901234567.895")).toBe("12,345,678,901,234,567.90");
+  expect(money("-1.005")).toBe("-1.01");
+});
+it("EEX starts a new number with a one mantissa", () => {
+  expect(run(["EEX", "ENTER"]).x.toNumber()).toBe(1);
+  expect(run(["8", "ENTER", "2", "+", "EEX", "3"]).x.toNumber()).toBe(1000);
 });
